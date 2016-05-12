@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <button class="success">success</button>
+  <button class="error">error</button>
+  <div>response status:<span class="res-status"></span>
+  <div>response body:<span class="res-body"></span>
+  <script>
+    const $ = document.querySelector.bind(document);
+    const api = path => {
+      fetch(`http://localhost:3001${path}`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: {foo: 'bar'}
+      })
+      .then(res => {
+        $('.res-status').textContent = res.status;
+        return res;
+      })
+      .then(res => res.json())
+      .then(json => $('.res-body').textContent = JSON.stringify(json))
+      .catch(error => console.error(error))
+      ;
+    }
+    $('.success').addEventListener('click', () => api('/'));
+    $('.error').addEventListener('click', () => api('/error'));
+  </script>
+</html>
