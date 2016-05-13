@@ -17,7 +17,7 @@ api.use((req, res, next) => {
   next();
 });
 api.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
   res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.header('Access-Control-Max-Age', 86400);
   res.status(204);
